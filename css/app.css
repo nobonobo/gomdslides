@@ -1,0 +1,165 @@
+body {
+  overflow: hidden;
+  font-size: 150%;
+  line-height: 110%;
+}
+
+#searchlight {
+  position: absolute !important;
+  z-index: 100 !important;
+  height: 300px !important;
+  width: 300px !important;
+  border-width: 100vh 100vw !important;
+  border-style: solid !important;
+  border-color: #000 !important;
+  top: -100vh !important;
+  left: -100vw !important;
+  background: #000 !important;
+  -moz-box-sizing: content-box !important;
+  -webkit-box-sizing: content-box !important;
+  -ms-box-sizing: content-box !important;
+  box-sizing: content-box !important;
+  /*transition: opacity 250ms;*/
+  opacity: 0;
+  pointer-events: none;
+}
+
+#searchlight.on {
+  opacity: 0.5;
+  background: -webkit-radial-gradient(
+    center,
+    ellipse cover,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 1) 60%,
+    rgba(0, 0, 0, 1) 100%
+  ) !important;
+  /* Chrome10+,Safari5.1+ */
+  background-repeat: no-repeat !important;
+}
+
+.controller {
+  position: absolute;
+  z-index: 1000;
+  right: 0;
+  bottom: 0;
+  padding: 0.5rem 0.5rem;
+}
+
+.controller a:focus {
+  box-shadow: none;
+}
+
+.container {
+  padding: 1rem;
+}
+
+.container .column {
+  padding: 0.4rem;
+}
+
+.content {
+  display: inline-block;
+  text-align: initial;
+}
+
+.card {
+  border-radius: 1.5rem;
+  box-shadow: 0 0.25rem 1rem rgba(48, 55, 66, 0.15);
+  width: 90vw;
+  height: 90vh;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  padding: 1rem 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.card-body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.active {
+  transform: translate3d(0, 0, 0) rotateY(0deg) translate3d(0, 0, 0);
+  filter: opacity(100%);
+}
+
+.prev {
+  transform: translate3d(-50%, 0, 0) rotateY(-90deg) translate3d(-50%, 0, 0);
+  filter: opacity(0%);
+}
+
+.next {
+  transform: translate3d(50%, 0, 0) rotateY(90deg) translate3d(50%, 0, 0);
+  filter: opacity(0%);
+}
+
+.forwardOut {
+  animation: leftSide 0.2s normal both;
+}
+
+.forwardIn {
+  animation: rightSide 0.2s normal both;
+}
+
+.reverseOut {
+  animation: rightSide 0.2s reverse both;
+}
+
+.reverseIn {
+  animation: leftSide 0.2s reverse both;
+}
+
+@keyframes leftSide {
+  0% {
+    transform: translate3d(0, 0, 0) rotateY(0deg) translate3d(0, 0, 0);
+    filter: opacity(100%);
+  }
+
+  100% {
+    transform: translate3d(-50%, 0, 0) rotateY(-90deg) translate3d(-50%, 0, 0);
+    filter: opacity(0%);
+  }
+}
+
+@keyframes rightSide {
+  0% {
+    transform: translate3d(50%, 0, 0) rotateY(90deg) translate3d(50%, 0, 0);
+    filter: opacity(0%);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotateY(0deg) translate3d(0, 0, 0);
+    filter: opacity(100%);
+  }
+}
+
+@keyframes fadein {
+  from {
+    filter: opacity(1%);
+    transform: translateY(20px);
+  }
+  to {
+    filter: opacity(100%);
+    transform: translateY(0);
+  }
+}
+
+.fragment {
+  filter: opacity(1%);
+}
+
+.appeared {
+  animation: fadein 0.2s;
+}
+
+pre {
+  padding: 0.5em 1em;
+  border-radius: 1rem;
+}
