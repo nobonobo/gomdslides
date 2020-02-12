@@ -46,6 +46,7 @@ type Slides struct {
 func (c *Slides) Mount() {
 	c.Navigate(location.Call("toString").String())
 	c.Last = c.Index
+	window.Call("eval", SearchlightJS)
 }
 
 // Navigate ...
@@ -103,6 +104,8 @@ func (c *Slides) OnKeyDown(this js.Value, args []js.Value) interface{} {
 		document.Get("body").Call("requestFullscreen")
 	case "KeyS":
 		c.SearchLight.Enabled = !c.SearchLight.Enabled
+		c.SearchLight.Active = c.SearchLight.Enabled
+		log.Print("spotlight:", c.SearchLight.Enabled)
 		vecty.Rerender(c.SearchLight)
 	case "KeyR":
 		go func() {
@@ -179,6 +182,7 @@ func (c *Slides) Render() vecty.ComponentOrHTML {
 				event.MouseOut(c.SearchLight.OnMouseOut),
 				event.MouseMove(c.OnMouseMove),
 				event.Wheel(c.SearchLight.OnWheel),
+				vecty.Style("cursor", c.Cursor),
 			),
 			contents,
 		),

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"strconv"
 	"syscall/js"
 
 	"github.com/gopherjs/vecty"
@@ -34,11 +33,15 @@ func (c *SearchLight) OnMouseDown(event *vecty.Event) {
 
 // OnMouseMove ...
 func (c *SearchLight) OnMouseMove(event *vecty.Event) {
-	c.Active = c.Enabled
-	x, y := event.Value.Get("pageX"), event.Value.Get("pageY")
-	c.Left = strconv.Itoa(x.Int()-150) + "px"
-	c.Top = strconv.Itoa(y.Int()-150) + "px"
-	vecty.Rerender(c)
+	/*
+		x, y := event.Value.Get("pageX"), event.Value.Get("pageY")
+		c.Left = strconv.Itoa(x.Int()-150) + "px"
+		c.Top = strconv.Itoa(y.Int()-150) + "px"
+	*/
+	if c.Active != c.Enabled {
+		c.Active = c.Enabled
+		vecty.Rerender(c)
+	}
 }
 
 // OnMouseOut ...
@@ -72,3 +75,14 @@ func (c *SearchLight) Render() vecty.ComponentOrHTML {
 		),
 	)
 }
+
+// SearchlightJS ...
+const SearchlightJS = `
+document.body.addEventListener("mousemove", ev => {
+	let e = document.getElementById("searchlight");
+	if (e!=null) {
+		e.style.marginLeft = (ev.pageX-150) + "px";
+		e.style.marginTop = (ev.pageY-150) + "px";
+	}
+})
+`
