@@ -1,3 +1,7 @@
+gomdslides suspended.
+
+use https://github.com/nobonobo/spago-slides instead of this.
+
 # gomdslides
 
 simplest presantation tool for gopher
